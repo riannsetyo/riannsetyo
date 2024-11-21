@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Menambahkan Font Awesome untuk ikon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lupa Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Navbar Kembali dengan background warna F0E3CA */
+        .navbar {
+            background-color: #F0E3CA;
+            padding: 20px 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #0056b3;
+        }
+
+        .navbar i {
+            margin-right: 8px;
+        }
+
+        .container {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 70px; /* Memberi jarak agar konten tidak tertutup navbar */
+        }
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Mengatur background input fields menjadi F0E3CA */
+        .container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #F0E3CA; /* Warna background input fields */
+            font-size: 14px;
+        }
+
+        .container button {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .container button:hover {
+            background-color: #e68900;
+        }
+
+        /* Menghilangkan background pada link Kirim Kode Verifikasi */
+        .verification-link {
+            margin-top: 10px;
+            background: none;
+            border: none;
+            color: #008CBA;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .verification-link:hover {
+            color: #007ba7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Kembali dengan background warna F0E3CA -->
+    <nav class="navbar">
+        <a href="index.html">
+            <i class="fas fa-arrow-left"></i> 
+        </a>
+    </nav>
+
+    <div class="container">
+        <h1>Lali Password</h1>
+        <form action="/reset-password" method="post">
+            <input type="password" name="new_password" placeholder="Password baru" required>
+            <input type="password" name="confirm_password" placeholder="Konfirmasi password" required>
+            <input type="text" name="verification_code" placeholder="Kode verifikasi" required>
+
+            <!-- Menempatkan span (tulisan) tepat di bawah input kode verifikasi tanpa background -->
+            <span class="verification-link" onclick="sendVerificationCode()">Kirim Kode Verifikasi</span>
+
+            <!-- Tombol Daftar di bawahnya -->
+            <button type="submit">Daftar</button>
+        </form>
+    </div>
+
+    <script>
+        function sendVerificationCode() {
+            alert('Kode verifikasi telah dikirim!'); // Logika untuk mengirim kode verifikasi dapat ditambahkan di sini
+        }
+    </script>
+</body>
+</html>

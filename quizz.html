@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Tembang Macapat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: #f9f9f9;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            padding: 10px;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color: #333;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + label {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+        }
+
+        label.correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+
+        label.incorrect {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">Time Left: 20:00</div>
+    <div class="quiz-container">
+        <h1>Kuis Tembang Macapat</h1>
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. Apa pengertian dari tembang macapat?</p>
+                <input type="radio" name="q1" value="A" id="q1a">
+                <label for="q1a">A. Tembang tradisional Bali</label>
+                <input type="radio" name="q1" value="B" id="q1b">
+                <label for="q1b">B. Tembang khas Jawa yang memiliki aturan tertentu</label>
+                <input type="radio" name="q1" value="C" id="q1c">
+                <label for="q1c">C. Tembang modern Indonesia</label>
+                <input type="radio" name="q1" value="D" id="q1d">
+                <label for="q1d">D. Tembang yang bebas tanpa aturan</label>
+            </div>
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. Apa yang dimaksud dengan guru gatra dalam tembang macapat?</p>
+                <input type="radio" name="q2" value="A" id="q2a">
+                <label for="q2a">A. Cacahing wanda saben larik</label>
+                <input type="radio" name="q2" value="B" id="q2b">
+                <label for="q2b">B. Tibaning swara ing saben pungkasaning gatra</label>
+                <input type="radio" name="q2" value="C" id="q2c">
+                <label for="q2c">C. Cacahing gatra/larik/baris saben sepada</label>
+                <input type="radio" name="q2" value="D" id="q2d">
+                <label for="q2d">D. Jenis tembang kang digarap kanthi luwes</label>
+            </div>
+            <!-- Tambahkan soal lainnya dengan pola yang sama -->
+            <button type="button" id="submit-btn">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const answers = {
+            q1: "B",
+            q2: "C",
+            // Tambahkan jawaban untuk pertanyaan lainnya
+        };
+
+        let timeLeft = 1200; // Timer dalam detik (20 menit)
+        const timerDisplay = document.getElementById("timer");
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                document.getElementById("submit-btn").click(); // Submit otomatis
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                timeLeft--;
+            }
+        }, 1000);
+
+        document.getElementById("submit-btn").addEventListener("click", function () {
+            const form = document.getElementById("quiz-form");
+            let score = 0;
+
+            Object.keys(answers).forEach(question => {
+                const options = document.getElementsByName(question);
+                options.forEach(option => {
+                    const label = option.nextElementSibling;
+                    if (option.value === answers[question]) {
+                        label.classList.add("correct");
+                    }
+                    if (option.checked) {
+                        if (option.value === answers[question]) {
+                            score += 10;
+                        } else {
+                            label.classList.add("incorrect");
+                        }
+                    }
+                });
+            });
+
+            document.getElementById("result").textContent = `Kamu mendapatkan skor: ${score} poin`;
+            clearInterval(countdown); // Hentikan timer setelah submit
+        });
+    </script>
+</body>
+</html>
